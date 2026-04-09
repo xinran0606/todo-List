@@ -9,6 +9,7 @@
     <input type="text" id="task"/>
     <button type="button" onclick="addTask()">Add Task</button>
     <ul id="taskList"></ul>
+    <button id="DeleteDone" onclick="deleteTask()">Delete</button>
 
 
 <script>
@@ -27,6 +28,16 @@ function addTask(){
     document.getElementById("taskList").appendChild(li);
 
     document.getElementById("task").value = "";
+}
+
+function deleteTask(){
+    let items = document.querySelectorAll("#taskList li");   // items = [task1, task2, task3]
+    items.forEach(function(li){                     // Operationen auf jede li
+        let checkbox = li.querySelector("input");
+        if (checkbox.checked) {
+            li.remove();
+        }
+    });
 }
 </script>
 </body>
