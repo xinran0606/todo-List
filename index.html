@@ -5,9 +5,11 @@
     <title>To-Do List</title>
 </head>
 <body>
-   <h2>To-Do List</h2>
+    <h2>To-Do List</h2>
     <input type="text" id="task"/>
     <button type="button" onclick="addTask()">Add Task</button>
+    <button type="button" onclick="important()">Mark Important</button>
+    <button type="button" onclick="unImportant()">Mark Unimportant</button>
     <h3>To Do</h3>
     <ul id="To-Do"></ul>
     <h3>Doing</h3>
@@ -56,14 +58,41 @@ function moveToDone(li){
     document.getElementById("done").appendChild(li);
     let btn = li.querySelector("button");
     btn.remove();
+
+    let checkbox = li.querySelector("input");
+    checkbox.remove();
 }
 
 function deleteTask(){
-    let items = document.querySelectorAll("#To-Do li, #doing li, #done li");   // items = [task1, task2, task3]
+    let items = document.querySelectorAll("#To-Do li, #doing li");   // items = [task1, task2, task3]
     items.forEach(function(li){                     // Operation on every li
         let checkbox = li.querySelector("input");
-        if (checkbox.checked) {
+        if (checkbox.checked){
             li.remove();
+        }
+    });
+}
+
+function important(){
+    let items = document.querySelectorAll("#To-Do li, #doing li");
+    items.forEach(function(li){
+        let checkbox = li.querySelector("input");
+        if (checkbox.checked){
+            li.style.color = "red";
+            li.style.fontWeight = "bold";
+            let parent = li.parentElement;
+            parent.prepend(li);
+        }
+    });
+}
+
+function unImportant(){
+    let items = document.querySelectorAll("#To-Do li, #doing li");
+    items.forEach(function(li){
+        let checkbox = li.querySelector("input");
+        if (checkbox.checked){
+            li.style.color = "";
+            li.style.fontWeight = "";
         }
     });
 }
