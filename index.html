@@ -8,7 +8,12 @@
    <h2>To-Do List</h2>
     <input type="text" id="task"/>
     <button type="button" onclick="addTask()">Add Task</button>
-    <ul id="taskList"></ul>
+    <h3>To Do</h3>
+    <ul id="To-Do"></ul>
+    <h3>Doing</h3>
+    <ul id="doing"></ul>
+    <h3>Done</h3>
+    <ul id="done"></ul>
     <button id="DeleteDone" onclick="deleteTask()">Delete</button>
 
 
@@ -25,14 +30,26 @@ function addTask(){
     let textNode = document.createTextNode(taskText);
     li.appendChild(textNode);
 
-    document.getElementById("taskList").appendChild(li);
+    let doingBtn = document.createElement("button");
+    doingBtn.type = "button";
+    doingBtn.textContent = "Do";
+    doingBtn.onclick = function() {
+        moveToDoing(li);    // moveToDoing has to know which task it gonna work with
+    };
+    li.appendChild(doingBtn);
+
+    document.getElementById("To-Do").appendChild(li);
 
     document.getElementById("task").value = "";
 }
 
+function moveToDoing(li){
+    document.getElementById("doing").appendChild(li);
+}
+
 function deleteTask(){
-    let items = document.querySelectorAll("#taskList li");   // items = [task1, task2, task3]
-    items.forEach(function(li){                     // Operationen auf jede li
+    let items = document.querySelectorAll("#To-Do li, #doing li, #done li");   // items = [task1, task2, task3]
+    items.forEach(function(li){                     // Operation on every li
         let checkbox = li.querySelector("input");
         if (checkbox.checked) {
             li.remove();
