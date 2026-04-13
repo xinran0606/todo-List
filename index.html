@@ -6,6 +6,7 @@
 </head>
 <body>
     <h2>To-Do List</h2>
+    <h3 id="date"></h3>
     <input type="text" id="task"/>
     <button type="button" onclick="addTask()">Add Task</button>
     <button type="button" onclick="important()">Mark Important</button>
@@ -20,6 +21,15 @@
 
 
 <script>
+let currentDate = new Date();
+
+function showDate(){
+    let formatted = currentDate.toLocaleDateString();
+    document.getElementById("date").textContent = formatted;
+}
+
+showDate();
+
 function addTask(){
     let taskText = document.getElementById("task").value;
 
