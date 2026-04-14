@@ -1,16 +1,21 @@
-let currentDate = new Date();
-
-function showDate(){
-    let formatted = currentDate.toLocaleDateString();
-    document.getElementById("date").textContent = formatted;
+function changeDate(){
+    let selectedDate = document.getElementById("datePicker").value;
+    currentDate = new Date(selectedDate);
+    document.getElementById("date").textContent = selectedDate;
 }
 
-showDate();
+let allTasks = {}; // Can not put it in the addTask() function, otherwise it would be created as {} every time.
 
 function addTask(){
     let taskText = document.getElementById("task").value;
 
     let li = document.createElement("li");         // Create a new "li" element
+
+    let key = currentDate.toLocaleDateString();
+    if (!allTasks[key]){
+        allTasks[key] = [];
+    }
+    allTasks[key].push(taskText);
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -83,3 +88,6 @@ function unImportant(){
         }
     });
 }
+
+
+
